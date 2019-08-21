@@ -1,0 +1,25 @@
+@mixin desktop {
+  @media (min-width: 1024px) { @content; }
+}
+
+@mixin phone {
+  @media (max-width: 768px) { @content; }
+}
+
+
+#noticeList {
+
+
+  @include phone {
+    font-size: 1rem;
+    margin-top: 2px;
+  }
+}
+
+
+#companyName {
+  @include phone {
+    font-size: 1rem;
+    margin-top: 1px;
+  }
+}

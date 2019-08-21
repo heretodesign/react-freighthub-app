@@ -1,0 +1,27 @@
+@mixin desktop {
+  @media (min-width: 1024px) { @content; }
+}
+
+@mixin phone {
+  @media (max-width: 768px) { @content; }
+}
+
+#mainFooter {
+  font-size: 0.8rem;
+  color: black;
+
+  
+  @include phone {
+    font-size: 1rem;
+  }
+}
+
+#btmFooter {
+
+  @include phone {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items:center;
+  }
+}

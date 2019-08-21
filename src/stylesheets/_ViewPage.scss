@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+
+@mixin desktop {
+  @media (min-width: 1024px) { @content; }
+}
+
+@mixin phone {
+  @media (max-width: 768px) { @content; }
+}
+
+#viewTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 100;
+}
+
+#boxContent {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  padding: 60px 113px;
+  font-weight: 100;
+  font-family: 'Roboto', sans-serif;
+
+  @include phone {
+      padding: 30px 50px;
+  }
+}
