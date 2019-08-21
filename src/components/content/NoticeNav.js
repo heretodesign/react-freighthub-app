@@ -24,7 +24,7 @@ const NoticeNav = () => {
                     <div className="column is-one-quarter">
                       <div className="field">
                         <div className="control">
-                          <Link to="/pages/detailpage" className="button is-info is-fullwidth" id="noticeList">Detail of Shipments</Link>
+                          {/*<Link to="/pages/detailpage" className="button is-info is-fullwidth" id="noticeList">Detail of Shipments</Link>*/}
                         </div>
                       </div>
                     </div>
