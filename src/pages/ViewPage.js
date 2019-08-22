@@ -5,12 +5,13 @@ import 'react-bulma-components/dist/react-bulma-components.min.css'
 import Image from "react-graceful-image"
 import Flickr from '../Flickr-1.4s-200px.svg'
 
+
 class ViewPage extends React.Component {
   state = {
     content: [],
     isLoading: true,
     newName: '',
-    addNewName: []
+    addNewName: [],
   }
 
   componentDidMount () {
@@ -107,7 +108,7 @@ class ViewPage extends React.Component {
                             <div className="column">
                               <div className="field">
                                 <div className="control">
-                                  <input onChange={e => this.handleChange(e)} className="textarea is-large" type="text" name="name" value={newName}  placeholder="Name" />
+                                  <input onChange={e => this.handleChange(e)} className="input is-info is-large" type="text" name="name" value={newName}  placeholder="..enter new Name" />
                                 </div>
                               </div>
                             </div>
@@ -116,7 +117,7 @@ class ViewPage extends React.Component {
                             <div className="column ">
                               <div className="field">
                                 <div className="control">
-                                  <button className="button is-large is-info is-fullwidth" type="submit" value="Submit">Update Name</button>
+                                  <button className="button is-large is-info is-fullwidth" type="submit" value="Submit"  id="updateName">Update Name</button>
                                 </div>
                               </div>
                             </div>

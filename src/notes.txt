@@ -12,3 +12,17 @@ npm install --save react-bulma-components
 
 npm install --save-dev jest
 npm install --save-dev @testing-library/react-hooks
+
+
+
+// updateName = (shipmentId) => {
+//   axios.put(`http://localhost:3000/shipments/${shipmentId}`)
+//   .then(response => {
+//     this.setState({
+//       shipments: this.state.shipments.filter(shipment => shipment.id != shipmentId)
+//     })
+//   })
+//   .catch(error => {
+//     alert('Cannnot Mark it as Complete')
+//   })
+// }

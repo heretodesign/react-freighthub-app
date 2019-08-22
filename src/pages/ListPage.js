@@ -3,20 +3,31 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Columns, Column } from "react-bulma-components/full"
 import 'react-bulma-components/dist/react-bulma-components.min.css'
+const paginate = require("paginate-array")
+
 
 class ListPage extends React.Component {
     state = {
         shipments: [],
+        size: 20,
+        page: 1,
+        currPage: null
     }
 
     componentDidMount() {
       axios.get('http://localhost:3000/shipments')
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
             let data = [...response.data]; //use spread to copy the res object into array
-            console.log(data);
+            // console.log(data);
+            const { page, size } = this.state;
+            const currPage = paginate(data, page, size);
+
             this.setState({
-                shipments: data
+              ...this.state,
+              data,
+                //shipments: data,
+                currPage
             })
         })
         .catch(error => {
@@ -24,31 +35,46 @@ class ListPage extends React.Component {
         })
     }
 
-    // updateName = (shipmentId) => {
-    //   axios.put(`http://localhost:3000/shipments/${shipmentId}`)
-    //   .then(response => {
-    //     this.setState({
-    //       shipments: this.state.shipments.filter(shipment => shipment.id != shipmentId)
-    //     })
-    //   })
-    //   .catch(error => {
-    //     alert('Cannnot Mark it as Complete')
-    //   })
-    // }
+    previousPage = () => {
+      const { currPage, page, size, data } = this.state;
+      if (page > 1) {
+        const newPage = page - 1;
+        const newCurrPage = paginate(data, newPage, size);
+        this.setState({
+          ...this.state,
+          page: newPage,
+          currPage: newCurrPage
+        });
+      }
+    }
+
+    nextPage = () => {
+      const { currPage, page, size, data } = this.state;
+      if (page < currPage.totalPages) {
+        const newPage = page + 1;
+        const newCurrPage = paginate(data, newPage, size);
+        this.setState({ ...this.state, page: newPage, currPage: newCurrPage });
+      }
+    }
+
 
     render() {
+       const { page, size, currPage } = this.state;
         return (
           <div>
             <section className="section is-paddingless-horizontal">
                 <div className="container grid is-large notification">
                     <div className="firstsection">
                       <h3 className="title is-5">Shipment Database Table</h3>
+                      <h3 className="title is-5">page: {page}</h3>
+                      <h3 className="title is-5">size: {size}</h3>
                         <div className="content">
                           <div className="columns">
                             <div className="column" id="tablelisttask">
                               <table className="table is-mobile">
                                 <thead>
                                   <tr>
+                                   <th><abbr title="id" className="is-3">id</abbr></th>
                                     <th><abbr title="id" className="is-3">Name</abbr></th>
                                     <th><abbr title="task">Cargo</abbr></th>
                                     <th><abbr title="completed">Mode</abbr></th>
@@ -60,29 +86,40 @@ class ListPage extends React.Component {
                                     <th><abbr title="action">Action</abbr></th>
                                   </tr>
                                 </thead>
-                                <tbody>
-                                  {
-                                    this.state.shipments.map(shipment => (
-                                      <tr className="is-5" key={shipment.id}>
-                                        <td className="is-6">{ shipment.name }</td>
-                                        <td className="is-5">{ shipment.cargo[0].type } / { shipment.cargo[0].description }/ { shipment.cargo[0].volume }</td>
-                                        <td className="is-5">{ shipment.mode }</td>
-                                        <td className="is-5">{ shipment.type }</td>
-                                        <td className="is-5">{ shipment.origin }</td>
-                                        <td className="is-5">{ shipment.destination }</td>
-                                        <td className="is-5">{ shipment.total }</td>
-                                        <td className="is-5">{ shipment.status }</td>
-                                        <td className="is-5">
-                                          <Link to={`/pages/viewpage/${shipment.id}`}>
-                                            <button className="button is-info">View Detials</button>
-                                          </Link>
-                                        </td>
-                                        {/*<td><button onClick={() => {this.updateName(shipment.id)} } className="button is-danger">Update Name</button></td>*/}
-                                      </tr>
-                                    ))
-                                  }
-                                </tbody>
+                                { currPage &&
+                                  <tbody>
+                                    {
+                                      currPage.data.map(shipment => (
+                                        <tr className="is-5" key={shipment.id}>
+                                          <td className="is-6">{ shipment.id }</td>
+                                          <td className="is-6">{ shipment.name }</td>
+                                          <td className="is-5">{ shipment.cargo[0].type } / { shipment.cargo[0].description }/ { shipment.cargo[0].volume }</td>
+                                          <td className="is-5">{ shipment.mode }</td>
+                                          <td className="is-5">{ shipment.type }</td>
+                                          <td className="is-5">{ shipment.origin }</td>
+                                          <td className="is-5">{ shipment.destination }</td>
+                                          <td className="is-5">{ shipment.total }</td>
+                                          <td className="is-5">{ shipment.status }</td>
+                                          <td className="is-5">
+                                            <Link to={`/pages/viewpage/${shipment.id}`}>
+                                              <button className="button is-info">View Detials</button>
+                                            </Link>
+                                          </td>
+                                          {/*<td><button onClick={() => {this.updateName(shipment.id)} } className="button is-danger">Update Name</button></td>*/}
+                                        </tr>
+                                      ))
+                                    }
+                                  </tbody>
+                                }
                               </table>
+                              <div className="columns">
+                                <div className="column is-2 has-text-centered">
+                                  <button onClick={this.previousPage} className="button is-info">Previous Page</button>
+                                </div>
+                                <div className="column is-1">
+                                  <button onClick={this.nextPage} className="button is-info">Next Page</button>
+                                </div>
+                              </div>
                              </div>
                           </div>
                         </div>
