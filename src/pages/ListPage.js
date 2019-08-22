@@ -17,7 +17,7 @@ class ListPage extends React.Component {
     componentDidMount() {
       axios.get('http://localhost:3000/shipments')
         .then(response => {
-            let data = [...response.data]; //use spread operator to copy the res into array
+            let data = [...response.data]; //use spread operator to copy the res into a new array
             const { page, size } = this.state;
             const currPage = paginate(data, page, size);
 
