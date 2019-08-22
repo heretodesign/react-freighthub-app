@@ -10,7 +10,7 @@ class ViewPage extends React.Component {
     content: [],
     isLoading: true,
     newName: '',
-    addYourSay: []
+    addNewName: []
   }
 
   componentDidMount () {
@@ -39,9 +39,9 @@ class ViewPage extends React.Component {
         })
     })
     .catch(err => console.log(err))
-    let copyArray = [...this.state.addYourSay]
+    let copyArray = [...this.state.addNewName]
     copyArray.push(this.state.newName)
-    this.setState({addYourSay: copyArray})
+    this.setState({addNewName: copyArray})
   }
 
 
@@ -92,7 +92,7 @@ class ViewPage extends React.Component {
                   <div className="content">
                     <div className="columns">
                      <div className="column is-three-fifths is-offset-one-fifth">
-                        {this.state.addYourSay.map((name) => {
+                        {this.state.addNewName.map((name) => {
                           return <h3>{name}</h3>
                         })}
 
