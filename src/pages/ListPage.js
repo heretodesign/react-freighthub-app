@@ -17,17 +17,14 @@ class ListPage extends React.Component {
     componentDidMount() {
       axios.get('http://localhost:3000/shipments')
         .then(response => {
-          // console.log(response.data);
-            let data = [...response.data]; //use spread to copy the res object into array
-            // console.log(data);
+            let data = [...response.data]; //use spread operator to copy the res into array
             const { page, size } = this.state;
             const currPage = paginate(data, page, size);
 
             this.setState({
               ...this.state,
               data,
-                //shipments: data,
-                currPage
+              currPage
             })
         })
         .catch(error => {
@@ -66,8 +63,7 @@ class ListPage extends React.Component {
                 <div className="container grid is-large notification">
                     <div className="firstsection">
                       <h3 className="title is-5">Shipment Database Table</h3>
-                      <h3 className="title is-5">page: {page}</h3>
-                      <h3 className="title is-5">size: {size}</h3>
+                      <h3 className="title is-6">Page: {page} && Size: {size}</h3>
                         <div className="content">
                           <div className="columns">
                             <div className="column" id="tablelisttask">
@@ -102,7 +98,7 @@ class ListPage extends React.Component {
                                           <td className="is-5">{ shipment.status }</td>
                                           <td className="is-5">
                                             <Link to={`/pages/viewpage/${shipment.id}`}>
-                                              <button className="button is-info">View Detials</button>
+                                              <button className="button is-info has-background-black-bis">View Detials</button>
                                             </Link>
                                           </td>
                                           {/*<td><button onClick={() => {this.updateName(shipment.id)} } className="button is-danger">Update Name</button></td>*/}

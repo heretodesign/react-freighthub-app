@@ -94,7 +94,7 @@ class ViewPage extends React.Component {
                     <div className="columns">
                      <div className="column is-three-fifths is-offset-one-fifth">
                         {this.state.addNewName.map((name) => {
-                          return <h3>{name}</h3>
+                          return <h3 className="title" id="viewTitle">{name}</h3>
                         })}
 
                         <h3 id="viewTitle">New Name: {newName}</h3>
