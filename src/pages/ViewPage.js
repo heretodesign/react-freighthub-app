@@ -47,7 +47,7 @@ class ViewPage extends React.Component {
 
 
   handleChange = (e) => {
-    this.setState({newComment: e.target.value})
+    this.setState({newName: e.target.value})
   }
 
   render() {
