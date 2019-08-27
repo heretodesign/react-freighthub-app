@@ -66,7 +66,10 @@ class ViewPage extends React.Component {
                               <>
                                 <h1 className="title is-5 has-text-black" id="viewTitle">Name: {content.name}</h1>
                                  <br />
-                                 <p className="subtitle is-5 has-text-grey" id="viewPara"> Cargo: <br />Type: { content.cargo[0].type } | Description: { content.cargo[0].description } | Volume: { content.cargo[0].volume }</p>
+                                 <p className="subtitle is-5 has-text-grey" id="viewPara">
+                                  Cargo: <br />Type: { content.cargo[0].type } |
+                                  Description: { content.cargo[0].description } | 
+                                  Volume: { content.cargo[0].volume }</p>
                                  <p className="subtitle is-5 has-text-grey" id="viewPara"> Mode: { content.mode }</p>
                                  <p className="subtitle is-5 has-text-grey" id="viewPara"> Type: { content.type }</p>
                                  <p className="subtitle is-5 has-text-grey" id="viewPara"> Destination: { content.destination } </p>
@@ -108,7 +111,14 @@ class ViewPage extends React.Component {
                             <div className="column">
                               <div className="field">
                                 <div className="control">
-                                  <input onChange={e => this.handleChange(e)} className="input is-info is-large" type="text" name="name" value={newName}  placeholder="..enter new Name" />
+                                  <input
+                                    onChange={e => this.handleChange(e)}
+                                    className="input is-info is-large"
+                                    type="text"
+                                    name="name"
+                                    value={newName}
+                                    placeholder="..enter new Name"
+                                 />
                                 </div>
                               </div>
                             </div>
@@ -117,7 +127,13 @@ class ViewPage extends React.Component {
                             <div className="column ">
                               <div className="field">
                                 <div className="control">
-                                  <button className="button is-large is-info is-fullwidth" type="submit" value="Submit"  id="updateName">Update Name</button>
+                                  <button
+                                    className="button is-large is-info is-fullwidth"
+                                    type="submit"
+                                    value="Submit"
+                                    id="updateName">
+                                    Update Name
+                                  </button>
                                 </div>
                               </div>
                             </div>

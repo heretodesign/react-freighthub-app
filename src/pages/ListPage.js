@@ -110,10 +110,18 @@ class ListPage extends React.Component {
                               </table>
                               <div className="columns">
                                 <div className="column is-2 has-text-centered">
-                                  <button onClick={this.previousPage} className="button is-info">Previous Page</button>
+                                  <button
+                                    onClick={this.previousPage}
+                                    className="button is-info">
+                                    Previous Page
+                                  </button>
                                 </div>
                                 <div className="column is-1">
-                                  <button onClick={this.nextPage} className="button is-info">Next Page</button>
+                                  <button
+                                    onClick={this.nextPage}
+                                    className="button is-info">
+                                    Next Page
+                                  </button>
                                 </div>
                               </div>
                              </div>

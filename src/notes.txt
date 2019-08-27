@@ -6,12 +6,18 @@ npm install axios --save
 npm install react-router-dom
 npm install node-sass --save
 npm install --save react-bulma-components
-
+npm install paginate-array
 
 =============   testing  =========================
 
 npm install --save-dev jest
 npm install --save-dev @testing-library/react-hooks
+npm install --save @testing-library/react @testing-library/jest-dom
+npm install --save enzyme enzyme-adapter-react-16 react-test-renderer
+
+
+
+
 
 
 
