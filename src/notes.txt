@@ -14,7 +14,7 @@ npm install --save-dev jest
 npm install --save-dev @testing-library/react-hooks
 npm install --save @testing-library/react @testing-library/jest-dom
 npm install --save enzyme enzyme-adapter-react-16 react-test-renderer
-
+npm install sinon
 
 
 
@@ -33,6 +33,112 @@ npm install --save enzyme enzyme-adapter-react-16 react-test-renderer
 //   })
 // }
 
+=============   testing  =========================
+
 
 // import ListPage from './pages/ListPage'
 // import ViewPage from './pages/ViewPage'
+
+
+
+
+
+
+import React from "react";
+import ReactDOM from "react-dom";
+import { shallow, mount } from 'enzyme'
+import ListPage from '../pages/ListPage'
+
+describe('Component: ListPage', () => {
+  const shipments = [
+    {
+      id: 'S1001',
+      name: 'New spring collection(2018)',
+      cargo: 'Furniture / 300 Tables/ 20',
+      mode: 'sea',
+      type: 'FCL',
+      origin: 'Ningbo port',
+      destination: 'Saarbrücker Str. 38, 10405 Berlin',
+      total: '3000',
+      status: 'ACTIVE',
+      url: 'http://localhost:3000/shipments'
+    },
+    {
+      id: 'S1002',
+      name: 'This is Abel',
+      cargo: 'Bikes model 27X / 100 Bikes model 27X/ 100',
+      mode: 'air',
+      type: 'LCL',
+      origin: 'Shanghai Port',
+      destination: 'Saarbrücker Str. 38, 10405 Berlin',
+      total: '10000',
+      status: 'COMPLETED',
+      url: 'http://localhost:3000/shipments'
+    }
+  ];
+
+
+  const axios = require('axios');
+
+  it('should render a list of shipments on #componentDidMount', () => {
+    const app = shallow(<ListPage />);
+    app.instance().componentDidMount();
+    expect(axios.get).toHaveBeenCalled();
+    expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/shipments');
+  })
+
+  it('should call nextPage when button is clicked', () => {
+    const mockFunction = jest.fn() // In-built Jest function mocker
+    const component = mount(<ListPage shipments={shipments} onClick={mockFunction} />)
+    // Test before event
+    expect(mockFunction).not.toHaveBeenCalled()
+    // simulate the click event
+    component.find('button').simulate('click')
+    // Test after event
+    expect(mockFunction).toHaveBeenCalled()
+  })
+
+  it('should call previousPage when button is clicked', () => {
+    const mockFunction = jest.fn()
+    const component = mount(<ListPage shipments={shipments}  onClick={mockFunction} />)
+    expect(mockFunction).not.toHaveBeenCalled()
+    component.find('button').simulate('click')
+    expect(mockFunction).toHaveBeenCalled()
+  })
+  // Snapshot test
+  it('should render', () => {
+    const component = <List shipments={shipments}  />
+
+    const tree = renderer.create(component).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+})
+===============================================================================================
+
+// describe('ViewPage Component', () => {
+//   describe('when provided with an array of shipments', () => {
+//     it('should render 1 shipment item based on props.shipments', () => {
+//       const shipments = [
+//         {
+//           id: 'S1001',
+//           name: 'New spring collection(2018)',
+//           cargo: 'Furniture / 300 Tables/ 20',
+//           mode: 'sea',
+//           type: 'FCL',
+//           origin: 'Ningbo port',
+//           destination: 'Saarbrücker Str. 38, 10405 Berlin',
+//           total: '3000',
+//           status: 'ACTIVE',
+//         }
+//       ];
+//       const viewPageInstance = shallow(
+//         <ViewPage shipments={shipments}/>
+//       );
+//       viewPageInstance.find('Content').forEach(contentInstance => {
+//        const contentProps = contentInstance.props();
+//        const matchingContent = shipments.find(content => content.id === contentProps.id);
+//        expect(contentProps.name).toBe(matchingContent.name);
+//      })
+//     })
+//   });
+// });

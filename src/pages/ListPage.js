@@ -15,7 +15,7 @@ class ListPage extends React.Component {
     }
 
     componentDidMount() {
-      axios.get('http://localhost:3000/shipments')
+      axios.get('/shipments')
         .then(response => {
             let data = [...response.data]; //use spread operator to copy the res into a new array
             const { page, size } = this.state;
@@ -98,7 +98,7 @@ class ListPage extends React.Component {
                                           <td className="is-5">{ shipment.status }</td>
                                           <td className="is-5">
                                             <Link to={`/pages/viewpage/${shipment.id}`}>
-                                              <button className="button is-info has-background-black-bis">View Detials</button>
+                                              <button className="button is-info has-background-black-bis">View Details</button>
                                             </Link>
                                           </td>
                                           {/*<td><button onClick={() => {this.updateName(shipment.id)} } className="button is-danger">Update Name</button></td>*/}

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { shallow } from 'enzyme'
 import ListPage from '../pages/ListPage'
+import sinon from 'sinon'
 
 
 jest.mock('axios', () => {

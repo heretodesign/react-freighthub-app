@@ -15,7 +15,7 @@ class ViewPage extends React.Component {
   }
 
   componentDidMount () {
-    axios.get(`http://localhost:3000/shipments/${this.props.match.params.id}`)
+    axios.get(`/shipments/${this.props.match.params.id}`)
     .then(result => {
       console.log(result.data)
       this.setState({
@@ -28,7 +28,7 @@ class ViewPage extends React.Component {
   addName = (e) => {
     e.preventDefault();
     console.log(this.state.newName)
-    axios.patch(`http://localhost:3000/shipments/${this.props.match.params.id}`,
+    axios.patch(`/shipments/${this.props.match.params.id}`,
       {
         name: this.state.newName
       }
@@ -68,7 +68,7 @@ class ViewPage extends React.Component {
                                  <br />
                                  <p className="subtitle is-5 has-text-grey" id="viewPara">
                                   Cargo: <br />Type: { content.cargo[0].type } |
-                                  Description: { content.cargo[0].description } | 
+                                  Description: { content.cargo[0].description } |
                                   Volume: { content.cargo[0].volume }</p>
                                  <p className="subtitle is-5 has-text-grey" id="viewPara"> Mode: { content.mode }</p>
                                  <p className="subtitle is-5 has-text-grey" id="viewPara"> Type: { content.type }</p>

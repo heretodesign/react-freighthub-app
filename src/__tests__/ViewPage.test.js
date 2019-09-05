@@ -1,10 +1,12 @@
 import React from "react";
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import ViewPage from '../pages/ViewPage'
+import sinon from 'sinon'
+
 
 describe('ViewPage Component', () => {
   describe('when provided with an array of shipments', () => {
-    it('contains a matching number of <p> elements', () => {
+    it('should render 1 shipment item based on props.shipments', () => {
       const shipments = [
         {
           id: 'S1001',
@@ -16,17 +18,6 @@ describe('ViewPage Component', () => {
           destination: 'Saarbrücker Str. 38, 10405 Berlin',
           total: '3000',
           status: 'ACTIVE',
-        },
-        {
-          id: 'S1002',
-          name: 'This is Abel',
-          cargo: 'Bikes model 27X / 100 Bikes model 27X/ 100',
-          mode: 'air',
-          type: 'LCL',
-          origin: 'Shanghai Port',
-          destination: 'Saarbrücker Str. 38, 10405 Berlin',
-          total: '10000',
-          status: 'COMPLETED',
         }
       ];
       const viewPageInstance = shallow(
@@ -40,3 +31,41 @@ describe('ViewPage Component', () => {
     })
   });
 });
+
+
+// it('simulates Link route when button Click', () => {
+//   const buttonClick = sinon.spy();
+//   const wrapper = shallow(<NoticeNav buttonClick={buttonClick} />);
+//   wrapper.find('Link').simulate('click');
+//   expect(buttonClick).to.have.property('callCount', 1);
+// })
+
+
+// describe('ViewPage Component', () => {
+//   it('should call props.addName when button is clicked', () => {
+//     const content = [
+//            {
+//              id: 'S1001',
+//              name: 'New spring collection(2018)',
+//              cargo: 'Furniture / 300 Tables/ 20',
+//              mode: 'sea',
+//              type: 'FCL',
+//              origin: 'Ningbo port',
+//              destination: 'Saarbrücker Str. 38, 10405 Berlin',
+//              total: '3000',
+//              status: 'ACTIVE',
+//            }
+//          ];
+//     const mockFunction = jest.fn() // In-built Jest function mocker
+//     const component = mount(<ViewPage content={content} onClick={mockFunction} />)
+//
+//     // Test before event
+//     expect(mockFunction).not.toHaveBeenCalled()
+//
+//     // simulate the click event
+//     component.find('button').simulate('click')
+//
+//     // Test after event
+//     expect(mockFunction).toHaveBeenCalled()
+//   })
+// })
